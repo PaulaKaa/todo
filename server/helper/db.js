@@ -5,15 +5,6 @@ dotenv.config()
 const environment = process.env.NODE_ENV || 'development'
 
 const port = process.env.PORT
-/*
-console.log(process.env.DB_USER);
-console.log(process.env.DB_HOST);
-console.log(environment);
-console.log(process.env.DB_NAME );
-console.log(process.env.TEST_DB_NAME);
-console.log(process.env.DB_PASSWORD);
-console.log(process.env.DB_PORT);
-*/
 
 const { Pool } = pkg
 const openDb = () => {
