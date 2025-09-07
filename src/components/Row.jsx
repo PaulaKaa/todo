@@ -1,3 +1,5 @@
+//A row component will display task (item) as li element. Item (task) and function deleteTask are passed as named properties into component.
+
 export default function Row({ item, deleteTask }) {
     return (
         <li>

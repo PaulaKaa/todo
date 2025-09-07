@@ -6,6 +6,8 @@ import jwt from 'jsonwebtoken'
 const { sign } = jwt
 const router = Router()
 
+
+//Implement signup endpoint. Email and password are received as JSON from client. Password is hashed using bcrypt library. Id as JSON object is returned after successful registration. 
 router.post('/signup', (req, res, next) => {
     const { user } = req.body
     
@@ -27,6 +29,8 @@ router.post('/signup', (req, res, next) => {
     })
 })
 
+
+//Implement signin endpoint to userRouter.js. User will be selected based on email. If there is a user with the email, password will be verified. Password passed as JSON from client is plain text and will be compared to hashed password stored into database. If credentials are valid, token is returned into client, which will be used to authenticate user.
 router.post('/signin', (req, res, next) => {
     const { user } = req.body
 

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { UserContext } from './UserContext'
 import axios from 'axios'
 
+//userProvider which contains state variable for user information and sign in/up functions. Async/await syntax is used to call backend with Axios
 export default function UserProvider({children}) {
     const userFromStorage = sessionStorage.getItem('user')
     const [user, setUser] = useState(userFromStorage ? JSON.parse(userFromStorage) : {email:'', password:''})
@@ -9,6 +10,7 @@ export default function UserProvider({children}) {
     const signUp = async () => {
         const headers = {headers: {'Content-Type': 'application/json'}}
         await axios.post(`${import.meta.env.VITE_API_URL}/user/signup`, JSON.stringify({user: user}), headers)
+        //After successful sign-up email and password are set to empty string and user must provide information when signing in.
         setUser({email:'', password:''})
     }
 
@@ -16,6 +18,7 @@ export default function UserProvider({children}) {
         const headers = {headers: {'Content-Type': 'application/json'}}
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/signin`, JSON.stringify({user: user}),headers)
         setUser(response.data)
+        //After successful login user data is stored into session storage containing token which is used to authorize user when calling backend.
         sessionStorage.setItem('user', JSON.stringify(response.data))
     }
 
@@ -25,3 +28,9 @@ export default function UserProvider({children}) {
         </UserContext.Provider>
     )
 }
+
+/*UserProvider component will provide context wrapping in all components in this
+application (are rendered inside provider using {children}). Value for the context is user
+state and functions setUser, signUp and signIn which can be used/called from all
+components within this application.
+*/
